@@ -15,5 +15,8 @@
 log/
 target/
 
+# Java
+*.class
+
 # Project specific
 EasyCryptoLib.jar

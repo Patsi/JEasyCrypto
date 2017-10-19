@@ -59,11 +59,19 @@ public class CryptoServer implements Runnable {
 					if (operation.equalsIgnoreCase("encrypt")) {
 						String method = (String) root.get("method"); // encrypt/decrypt
 						String data = (String) root.get ("data"); // text to be handled
-						result = EasyCryptoAPI.encrypt(data, method);
+						if (data != null && !data.isEmpty()) {
+							result = EasyCryptoAPI.encrypt(data, method);
+						} else {
+							result = new EasyCryptoAPI.Result(EasyCryptoAPI.ResultCode.EError, "Empty strings can't be encrypted");
+						}	
 					} else if (operation.equalsIgnoreCase("decrypt")) {
 						String method = (String) root.get("method"); // encrypt/decrypt
 						String data = (String) root.get ("data"); // text to be handled
-						result = EasyCryptoAPI.decrypt(data, method);
+						if (data != null && !data.isEmpty()) {
+							result = EasyCryptoAPI.decrypt(data, method);
+						} else {
+							result = new EasyCryptoAPI.Result(EasyCryptoAPI.ResultCode.EError, "Empty strings can't be decrypted");
+						}	
 					} else if (operation.equalsIgnoreCase("capabilities")) {
 						String methods = EasyCryptoAPI.methods();
 						result = new EasyCryptoAPI.Result(EasyCryptoAPI.ResultCode.ESuccess, methods);
